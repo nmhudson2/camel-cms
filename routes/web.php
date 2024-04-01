@@ -16,4 +16,7 @@ Route::middleware([
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
+    Route::get('/editor', function () {
+        return view('editor', ['exists' => 'false', 'page_meta' => null]);
+    })->name('editor');
 });

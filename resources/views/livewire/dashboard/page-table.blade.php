@@ -1,0 +1,22 @@
+<table class="m-auto w-[90%] border-2 border-red-400 text-center">
+    <tr>
+        <th>
+            Title
+        </th>
+        <th>
+            Slug
+        </th>
+        <th>
+            Author
+        </th>
+        <th>
+            Created
+        </th>
+    </tr>
+    <tr>
+        <td>Sample</td>
+        <td>/new-page</td>
+        <td>Author</td>
+        <td>Timestamp</td>
+    </tr>
+</table>

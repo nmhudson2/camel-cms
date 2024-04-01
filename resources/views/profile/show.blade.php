@@ -20,7 +20,12 @@
 
                 <x-section-border />
             @endif
+                <!-- Custom component for handling role change. -->
+                <div class="mt-10 sm:mt-0">
+                    @livewire('profile.change-role')
+                </div>
 
+                <x-section-border />
             @if (Laravel\Fortify\Features::canManageTwoFactorAuthentication())
                 <div class="mt-10 sm:mt-0">
                     @livewire('profile.two-factor-authentication-form')

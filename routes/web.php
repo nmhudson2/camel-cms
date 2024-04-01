@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Route;
 
 // Base route calls the PageRouteController class, which will redirect based on the incomming request. 
 Route::get('/', function () {
-    return view('welcome');
+    return view('desktop');
 });
 
 Route::middleware([

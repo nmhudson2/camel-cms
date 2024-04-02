@@ -10,20 +10,31 @@ use Illuminate\Support\Facades\Auth;
 
 class PageController extends Controller
 {
+    public function cleanSlugs(string $slug)
+    {
+        $slug = str_replace('/', '', $slug);
+        $slug = str_replace(',', '', $slug);
+        $slug = str_replace('.', '', $slug);
+        $slug = str_replace(' ', '-', $slug);
+        e($slug);
+        return $slug;
+    }
     public function store(Request $request)
     {
         Page::create([
-            'page_slug' => $request->page_slug,
+            'page_slug' => $this->cleanSlugs($request->page_slug),
             'text_contents' => json_encode($request->text_contents),
-            'template' => $request->template,
             'name' => $request->name,
-            'last_edited_at' => Carbon::now(),
             'author' => auth()->user()->name,
         ]);
     }
-    public function index(string $slug)
+    public function index(string|null $slug)
     {
-        return Page::select(['name', 'page_slug', 'text_contents', 'template', 'author'])->where('page_slug', $slug)->get()->toArray();
+        return Page::select(['name', 'page_slug', 'text_contents',  'author'])->where('page_slug', $slug)->get()->toArray();
+    }
+    public function getAllPages()
+    {
+        return Page::select(['name', 'page_slug', 'text_contents', 'author', 'created_at'])->get()->toArray();
     }
     public function checkSlug(Request $request)
     {

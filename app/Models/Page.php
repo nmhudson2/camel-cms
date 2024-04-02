@@ -15,11 +15,6 @@ class Page extends Model
         'name',
         'page_slug',
         'text_contents',
-        'template',
         'last_edited_at'
-    ];
-
-    protected $hidden = [
-        'created_at'
     ];
 }

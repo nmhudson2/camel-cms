@@ -4,7 +4,8 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration {
+return new class extends Migration
+{
     /**
      * Run the migrations.
      */
@@ -12,16 +13,10 @@ return new class extends Migration {
     {
         Schema::dropIfExists('pages');
         Schema::create('pages', function (Blueprint $table) {
-            $table->id("author");
-            $table->string("page_slug");
+            $table->string("author");
+            $table->string("page_slug")->primary();
             $table->json("text_contents");
-            $table->string("template");
-            $table->string("last_edited_at");
             $table->timestamps();
-        });
-
-        Schema::table('pages', function (Blueprint $table) {
-            $table->foreign("author")->references("id")->on('users');
         });
     }
 
@@ -33,6 +28,4 @@ return new class extends Migration {
             }
         });
     }
-
-
 };

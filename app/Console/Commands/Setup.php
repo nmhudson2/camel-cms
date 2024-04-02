@@ -31,6 +31,10 @@ class Setup extends Command
         $values = [];
         $this->newLine(3);
         $this->info('Welcome To the Camel CMS setup Tool!');
+        $this->info('This Tool will walk you through setting important environment variables.');
+        $this->warn('Running this CLI again may cause irreversible damage to your site. If you need to reset, all databases must be dropped first.');
+        $this->warn('These actions are irreversible.');
+        $this->error('Do not leave this tool incomplete.');
         $this->newLine(2);
         $site_name = $this->ask('Enter Site Name', "Camel CMS");
         $writer->set('APP_NAME', $site_name);

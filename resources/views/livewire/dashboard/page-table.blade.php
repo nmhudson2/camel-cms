@@ -1,7 +1,10 @@
-<table class="m-auto w-[90%] border-2 border-red-400 text-center">
+<table class="m-auto w-[90%] h-[90%] shadow-xl bg-white rounded text-center">
     <tr>
         <th>
-            Title
+
+        </th>
+        <th>
+            Page Name
         </th>
         <th>
             Slug
@@ -9,14 +12,26 @@
         <th>
             Author
         </th>
+
         <th>
             Created
         </th>
     </tr>
-    <tr>
-        <td>Sample</td>
-        <td>/new-page</td>
-        <td>Author</td>
-        <td>Timestamp</td>
+    @foreach($pages as $page)
+    <tr class='border-b-2 border-gray'>
+        <td><a href="{{route('editor.page_slug', ['exists'=>'true','page_slug' => $page['page_slug']])}}">Edit</a></td>
+        <td>
+            {{$page['name']}}
+        </td>
+        <td>
+            {{$page['page_slug']}}
+        </td>
+        <td>
+            {{$page['author']}}
+        </td>
+        <td>
+            {{explode('T',$page['created_at'])[0]}}
+        </td>
     </tr>
+    @endforeach
 </table>

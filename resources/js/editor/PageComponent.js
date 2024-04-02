@@ -96,10 +96,6 @@ async function sendContents() {
     formData.append("name", document.getElementById("Name").value),
         formData.append("page_slug", document.getElementById("Slug").value),
         formData.append(
-            "template",
-            document.getElementById("page_template").value
-        ),
-        formData.append(
             "text_contents",
             JSON.stringify({ content: dataBlocks })
         );

@@ -36,10 +36,11 @@
 
         <!-- Page Content -->
         <main class='flex flex-row py-10'>
-            <form action="" method="{{$exists == 'true' ? 'PATCH': 'POST' }}" name="page_editor" class="w-[90%] m-auto bg-white flex flex-row rounded justify-between ">
-                <div class="flex flex-col w-[300px] border-2 border-red-500">
+            <form name="page_editor" class="w-[90%] m-auto bg-white flex flex-row rounded justify-between h-screen">
+                <input type="text" class="hidden" id='csrf-token' value="{{Session::token()}}">
+                <div class="flex flex-col w-[300px] shadow-xl">
                     @livewire('editor.toolbar')
-                    <button type="submit" form='page_editor'>{{$exists=='true'?'Update':'Create Page'}}</button>
+                    <button class='m-5 p-1 bg-black text-white rounded ' id="submit_page">{{$exists=='true'?'Update':'Create Page'}}</button>
                 </div>
 
                 @livewire('editor.page-component-editor')

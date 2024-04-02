@@ -7,22 +7,22 @@ function toggleHiddenElementOptions() {
 
 document.addEventListener("DOMContentLoaded", function (event) {
     class PageComponent {
-        element;
-        content;
-
         HeaderMap = {
             "h-big": "Header",
             "h-small": "Sub Header",
         };
 
-        init(element, content) {
-            this.element = element;
-            this.content = content;
+        saveFields() {
+            let fields =
+                document.querySelectorAll("input[camel_type]") &&
+                document.querySelectorAll("textarea[camel_type]");
+            console.log(fields);
         }
 
         createLabel(content, component_id) {
             let label = document.createElement("h3");
             label.innerText = content;
+            label.classList = "mt-4 text-2xl";
             label.setAttribute("target", component_id);
 
             return label;
@@ -46,11 +46,13 @@ document.addEventListener("DOMContentLoaded", function (event) {
                 type == "h-big" || type == "h-small"
                     ? document.createElement("input")
                     : document.createElement("textarea");
+
             let tempID = Math.round(Math.random(8) * 100);
             root.setAttribute("camel_type", type);
             root.setAttribute("camel_id", tempID);
+            root.setAttribute("form", "page_editor");
             root.classList =
-                "border-2 border-black rounded w-full mx-auto mt-5 ";
+                "border-2 border-black rounded w-full mx-auto mt-1 shadow-xl";
             document.getElementById("page_contents_root").append(root);
 
             root.insertAdjacentElement(
@@ -65,19 +67,54 @@ document.addEventListener("DOMContentLoaded", function (event) {
     }
     PageComponent = new PageComponent();
 
-    let element_options = document.querySelectorAll(
-        'button[type="elementSelector"]'
-    );
     document
         .getElementById("add_new")
         .addEventListener("click", function (event) {
             event.preventDefault();
             toggleHiddenElementOptions();
         });
-    element_options.forEach((element) => {
-        element.addEventListener("click", function (event) {
-            event.preventDefault();
-            PageComponent.createWireframe(this.value);
+    document
+        .querySelectorAll('button[type="elementSelector"]')
+        .forEach((element) => {
+            element.addEventListener("click", function (event) {
+                event.preventDefault();
+                PageComponent.createWireframe(this.value);
+            });
+        });
+});
+
+// Function to send page contents as JSON to server.
+async function sendContents() {
+    let dataBlocks = [];
+    document.querySelectorAll("[camel_id]").forEach((element) => {
+        dataBlocks.push({
+            type: element.getAttribute("camel_type"),
+            text: element.value,
         });
     });
-});
+    let formData = new FormData();
+    formData.append("name", document.getElementById("Name").value),
+        formData.append("page_slug", document.getElementById("Slug").value),
+        formData.append(
+            "template",
+            document.getElementById("page_template").value
+        ),
+        formData.append(
+            "text_contents",
+            JSON.stringify({ content: dataBlocks })
+        );
+
+    fetch("/create-new", {
+        method: "POST",
+        headers: {
+            "X-CSRF-TOKEN": document.getElementById("csrf-token").value,
+        },
+        body: formData,
+    });
+}
+document
+    .getElementById("submit_page")
+    .addEventListener("click", function (event) {
+        event.preventDefault();
+        sendContents();
+    });

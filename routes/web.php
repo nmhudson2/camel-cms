@@ -1,6 +1,9 @@
 <?php
 
+use App\Http\Controllers\PageController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Request;
+
 
 
 // Base route calls the PageRouteController class, which will redirect based on the incomming request. 
@@ -19,4 +22,5 @@ Route::middleware([
     Route::get('/editor', function () {
         return view('editor', ['exists' => 'false', 'page_meta' => null]);
     })->name('editor');
+    Route::post('/create-new', [PageController::class, 'store'])->name('create-new');
 });

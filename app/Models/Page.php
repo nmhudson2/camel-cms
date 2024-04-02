@@ -10,8 +10,13 @@ class Page extends Model
     use HasFactory;
     protected $table = 'pages';
 
-    protected $guarded = [
-        'author'
+    protected $fillable = [
+        'author',
+        'name',
+        'page_slug',
+        'text_contents',
+        'template',
+        'last_edited_at'
     ];
 
     protected $hidden = [

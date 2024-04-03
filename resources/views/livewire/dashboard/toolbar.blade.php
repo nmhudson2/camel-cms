@@ -2,6 +2,6 @@
     <ul class="flex flex-row justify-between">
         <li>Profile</li>
         <li><a href="{{route('editor.page_slug',['exists'=>'false','page_meta'=>null])}}">New Page</a></li>
-        <li>Site Settings</li>
+        <li><a href="{{route('settings.index')}}">Site Settings</a></li>
     </ul>
 </span>

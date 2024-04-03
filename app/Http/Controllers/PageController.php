@@ -21,13 +21,15 @@ class PageController extends Controller
     }
     public function store(Request $request)
     {
-        Page::create([
+        Page::updateOrCreate([
             'page_slug' => $this->cleanSlugs($request->page_slug),
+        ], [
             'text_contents' => json_encode($request->text_contents),
             'name' => $request->name,
             'author' => auth()->user()->name,
         ]);
     }
+
     public function index(string|null $slug)
     {
         return Page::select(['name', 'page_slug', 'text_contents',  'author'])->where('page_slug', $slug)->get()->toArray();

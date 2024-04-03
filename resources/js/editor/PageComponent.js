@@ -4,67 +4,65 @@ function toggleHiddenElementOptions() {
     let optionsMenu = document.getElementById("options-menu");
     optionsMenu.classList.toggle("hidden");
 }
+class PageComponent {
+    HeaderMap = {
+        "h-big": "Header",
+        "h-small": "Sub Header",
+    };
 
-document.addEventListener("DOMContentLoaded", function (event) {
-    class PageComponent {
-        HeaderMap = {
-            "h-big": "Header",
-            "h-small": "Sub Header",
-        };
-
-        saveFields() {
-            let fields =
-                document.querySelectorAll("input[camel_type]") &&
-                document.querySelectorAll("textarea[camel_type]");
-            console.log(fields);
-        }
-
-        createLabel(content, component_id) {
-            let label = document.createElement("h3");
-            label.innerText = content;
-            label.classList = "mt-4 text-2xl";
-            label.setAttribute("target", component_id);
-
-            return label;
-        }
-        createComponentOptions(component_id) {
-            let options = document.createElement("button");
-            options.addEventListener("click", function (event) {
-                event.preventDefault();
-                document.querySelector(`[camel_id="${component_id}"]`).remove();
-                document.querySelector(`[target="${component_id}"]`).remove();
-                this.remove();
-            });
-            options.setAttribute("target", component_id);
-            options.classList = "mb-5 mt-1";
-            options.style.alignSelf = "baseline";
-            options.innerHTML = "Delete";
-            return options;
-        }
-        createWireframe(type) {
-            let root =
-                type == "h-big" || type == "h-small"
-                    ? document.createElement("input")
-                    : document.createElement("textarea");
-
-            let tempID = Math.round(Math.random(8) * 100);
-            root.setAttribute("camel_type", type);
-            root.setAttribute("camel_id", tempID);
-            root.setAttribute("form", "page_editor");
-            root.classList =
-                "border-2 border-black rounded w-full mx-auto mt-1 shadow-xl";
-            document.getElementById("page_contents_root").append(root);
-
-            root.insertAdjacentElement(
-                "beforebegin",
-                this.createLabel(this.HeaderMap[type] ?? "Paragraph", tempID)
-            );
-            root.insertAdjacentElement(
-                "afterend",
-                this.createComponentOptions(tempID)
-            );
-        }
+    saveFields() {
+        let fields =
+            document.querySelectorAll("input[camel_type]") &&
+            document.querySelectorAll("textarea[camel_type]");
+        console.log(fields);
     }
+
+    createLabel(content, component_id) {
+        let label = document.createElement("h3");
+        label.innerText = content;
+        label.classList = "mt-4 text-2xl";
+        label.setAttribute("target", component_id);
+
+        return label;
+    }
+    createComponentOptions(component_id) {
+        let options = document.createElement("button");
+        options.addEventListener("click", function (event) {
+            event.preventDefault();
+            document.querySelector(`[camel_id="${component_id}"]`).remove();
+            document.querySelector(`[target="${component_id}"]`).remove();
+            this.remove();
+        });
+        options.setAttribute("target", component_id);
+        options.classList = "mb-5 mt-1";
+        options.style.alignSelf = "baseline";
+        options.innerHTML = "Delete";
+        return options;
+    }
+    createWireframe(type, content = null) {
+        let root =
+            type == "h-big" || type == "h-small"
+                ? document.createElement("input")
+                : document.createElement("textarea");
+
+        let tempID = Math.round(Math.random(8) * 100);
+        root.setAttribute("camel_type", type);
+        root.setAttribute("camel_id", tempID);
+        root.classList =
+            "border-2 border-black rounded w-full mx-auto mt-1 shadow-xl";
+        document.getElementById("page_contents_root").append(root);
+
+        root.insertAdjacentElement(
+            "beforebegin",
+            this.createLabel(this.HeaderMap[type] ?? "Paragraph", tempID)
+        );
+        root.insertAdjacentElement(
+            "afterend",
+            this.createComponentOptions(tempID)
+        );
+    }
+}
+document.addEventListener("DOMContentLoaded", function (event) {
     PageComponent = new PageComponent();
 
     document

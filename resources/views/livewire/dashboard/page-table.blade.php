@@ -1,4 +1,4 @@
-<table class="m-auto w-[90%] h-[90%] shadow-xl bg-white rounded text-center">
+<table class="m-auto w-[90%] shadow-xl bg-white rounded text-center">
     <tr>
         <th>
 

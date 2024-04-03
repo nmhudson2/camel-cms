@@ -40,7 +40,8 @@
                 <input type="text" class="hidden" id='csrf-token' value="{{Session::token()}}">
                 <div class="flex flex-col w-[300px] shadow-xl">
                     @livewire('editor.toolbar')
-                    <button class='m-5 p-1 bg-black text-white rounded ' id="submit_page">{{$exists=='true'?'Update':'Create Page'}}</button>
+                    <button class='m-5 p-1 bg-black text-white rounded '
+                        id="submit_page">{{request()->exists=='true'?'Update':'Create Page'}}</button>
                 </div>
 
                 @livewire('editor.page-component-editor')

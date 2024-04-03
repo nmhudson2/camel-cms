@@ -10,6 +10,9 @@ class Page extends Model
     use HasFactory;
     protected $table = 'pages';
 
+    protected $primaryKey = 'page_slug';
+    public $incrementing = false;
+
     protected $fillable = [
         'author',
         'name',

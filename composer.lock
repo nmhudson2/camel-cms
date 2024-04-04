@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b6278603ae0a94f75939e7f646d8ba2b",
+    "content-hash": "c27ab5da243f47fe18b9a1d8f381b8b9",
     "packages": [
         {
             "name": "bacon/bacon-qr-code",
@@ -2197,6 +2197,60 @@
                 }
             ],
             "time": "2024-03-14T14:03:32+00:00"
+        },
+        {
+            "name": "mirazmac/dotenvwriter",
+            "version": "0.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/MirazMac/DotEnvWriter.git",
+                "reference": "e509d367335c881fb1b1dcae6987c3ebed7d902d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/MirazMac/DotEnvWriter/zipball/e509d367335c881fb1b1dcae6987c3ebed7d902d",
+                "reference": "e509d367335c881fb1b1dcae6987c3ebed7d902d",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^6",
+                "vlucas/phpdotenv": "^5.3"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "MirazMac\\DotEnv\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Miraz Mac",
+                    "email": "mirazmac@gmail.com",
+                    "homepage": "https://mirazmac.com",
+                    "role": "Original Author"
+                }
+            ],
+            "description": "A PHP library to write values to .env (DotEnv) files",
+            "homepage": "https://mirazmac.com",
+            "keywords": [
+                "dot env",
+                "dot env writer",
+                "env",
+                "environment",
+                "variables"
+            ],
+            "support": {
+                "issues": "https://github.com/MirazMac/DotEnvWriter/issues",
+                "source": "https://github.com/MirazMac/DotEnvWriter/tree/0.4"
+            },
+            "time": "2023-12-09T06:55:35+00:00"
         },
         {
             "name": "mobiledetect/mobiledetectlib",

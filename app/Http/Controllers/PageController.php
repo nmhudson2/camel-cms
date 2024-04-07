@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\PageResource;
 use Illuminate\Http\Request;
 use App\Models\Page;
 use Carbon\Carbon;
@@ -32,11 +33,15 @@ class PageController extends Controller
 
     public function index(string|null $slug)
     {
-        return Page::select(['name', 'page_slug', 'text_contents',  'author'])->where('page_slug', $slug)->get()->toArray();
+        $resource = new PageResource(Page::findOrFail($slug));
+        return view('index', ['page_meta' => [
+            'name' => $resource['name'],
+            'author' => $resource['author'],
+        ], 'content' => json_decode($resource['text_contents'], true)]);
     }
     public function getAllPages()
     {
-        return Page::select(['name', 'page_slug', 'text_contents', 'author', 'created_at'])->get()->toArray();
+        return Page::select(['name', 'page_slug', 'text_contents', 'author', 'created_at'])->paginate(25);
     }
     public function checkSlug(Request $request)
     {

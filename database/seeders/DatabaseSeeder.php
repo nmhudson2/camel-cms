@@ -26,7 +26,7 @@ class DatabaseSeeder extends Seeder
 
         Page::factory()->create([
             'name' => 'homepage',
-            'page_slug' => '/homepage',
+            'page_slug' => 'homepage',
             'author' => 'SuperUser',
             'text_contents' => json_encode("{\"content\":[{\"type\":\"h-big\",\"text\":\"Welcome to the homepage!\"}]}")
         ]);

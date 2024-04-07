@@ -1,14 +1,16 @@
 <?php
 
 use App\Http\Controllers\PageController;
+use App\Http\Controllers\PageRouteController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 
 
 
 // Base route calls the PageRouteController class, which will redirect based on the incomming request. 
-Route::get('/{slug?}', function () {
-    return view('desktop');
+Route::get('/{slug?}', function (?string $slug = null) {
+    $controller = new PageRouteController($slug);
+    return $controller->handle();
 });
 
 Route::middleware([

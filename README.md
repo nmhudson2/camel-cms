@@ -1,66 +1,50 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+<p align="center"><img src="images/camel.png" alt="Camel CMS Logo"/></p>
+<h1 align="center">Camel CMS</h1>
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## About Camel CMS
 
-## About Laravel
+Camel CMS is a simple, text-focused Content Management System. It provides a page editor for creating basic pages, a profile/account manager, and a site settings page for customizing your site. The primary focus is to provide a small editor for creating pages, built upon the Laravel framework, with a separates file path for craeting custom content.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+#### How to creat your own themes
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+At the root of your CMS directory is an `includes/themes/` directory, which is where all theme files should be placed. These themes can include CSS and JS files, as well as any other templates for pages/components. It is already integrated into the Composer Autoloader, so it can be accessed throughout the application if you need to extend functionality.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## Deploy Guides
 
-## Learning Laravel
+### Prerequisites
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+You should have [PHP](https://www.php.net/), [Composer](https://getcomposer.org/download/), and [Node.js](https://nodejs.org/en) installed locally in order to build and run Camel CMS from your `localhost`.
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+### Deployment
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+You are encouraged to follow the specific deployment steps set forth by your hosting provider. However, Camel CMS recommends using [Laravel Forge](https://forge.laravel.com/) for hosting, as it offers tight integration with core Laravel concepts.
 
-## Laravel Sponsors
+Once the application is setup on your chosen provider, it is recommended that these commands are run:
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+`composer install`
+`npm run build`
+`php artisan migrate:fresh`
+`php artisan db:seed`
 
-### Premium Partners
+These commands ensure that all resouces are built, dependencies are installed, and that the Super User is created. If you are using Laravel Forge, then the application will need to be run in non-production mode for several commands. Alternatively, these command can be added to your build scripts or deploy commands for CI/CD pipelines.
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+### Post-Deploy
 
-## Contributing
+In order to first access your instance of Camel CMS, navigate to `https://{yoururl.com}/login`, and use the auto generated `SUPERUSER` credentials to login and start creating content or other accounts. This `SUPERUSER` is unique to your instance of Camel CMS and is built using credentials in your `.env` file. Therefore, **do not** share these credentials with anyone, and feel free to delete this `SUPERUSER` account **after** you have created a personal account with your own credentials.
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+#### The SUPERUSER
 
-## Code of Conduct
+This is an auto-generated account that uses credentials in your unique `.env` file. The format follows:
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+```
+Username: {DB_USERNAME}@app.com
+Password: {DB_PASSWORD}
+```
 
-## Security Vulnerabilities
+## Camel CMS License
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Camel CMS is protected under the [MIT license](https://opensource.org/licenses/MIT).
 
-## License
+## Laravel License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).

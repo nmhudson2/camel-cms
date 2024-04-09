@@ -44,6 +44,14 @@ return [
             'throw' => false,
         ],
 
+        'themes' => [
+            'driver' => 'local',
+            'root' => base_path('includes/themes'),
+            'url' => env('APP_URL') . '/includes/themes',
+            'visibility' => 'public',
+            'throw' => false
+        ],
+
         's3' => [
             'driver' => 's3',
             'key' => env('AWS_ACCESS_KEY_ID'),
@@ -70,7 +78,7 @@ return [
     */
 
     'links' => [
-        base_path('includes/themes') => storage_path('themes'),
+        base_path('includes') => public_path('includes'),
         public_path('storage') => storage_path('app/public'),
         base_path('images') => storage_path('app/images'),
     ],

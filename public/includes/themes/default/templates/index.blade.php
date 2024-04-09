@@ -7,33 +7,34 @@ where content will be propogated. -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{env("APP_NAME")}}&nbsp; &#x2022; &nbsp; {{ucfirst($page_meta['name'])}}</title>
-    <link rel="stylesheet" href="{{Storage::url('themes/'.env('ACTIVE_THEME','default').'/assets/css/index.css')}}">
+    <base href="{{env('APP_URL')}}" />
+    <link rel="stylesheet" href="{{asset('includes/themes/default/assets/css/index.css')}}">
 
 </head>
 
 <body>
-
     @php
     $blocks = json_decode($content,true)['content']
     @endphp
+
     @foreach($blocks as $block)
     @switch($block['type'])
     @case('h-big')
-    <x-header-large>
+    <x-header-large class="{{$block['ClassList']}}" id="{{$block['idList']}}">
         <x-slot name="content">
             {{$block['text']}}
         </x-slot>
     </x-header-large>
     @break
     @case('h-small')
-    <x-header-small>
+    <x-header-small class="{{$block['ClassList']}}" id="{{$block['idList']}}">
         <x-slot name="content">
             {{$block['text']}}
         </x-slot>
     </x-header-small>
     @break
     @case('paragraph')
-    <x-paragraph>
+    <x-paragraph class="{{$block['ClassList']}}" id="{{$block['idList']}}">
         <x-slot name="content">
             {{$block['text']}}
         </x-slot>

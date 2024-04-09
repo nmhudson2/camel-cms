@@ -3,6 +3,6 @@
 return [
     'paths' => [
         base_path('resources/views'),
-        storage_path('themes/' . env('ACTIVE_THEME', 'default') . '/templates')
-    ]
+        public_path('includes/themes/' . env('ACTIVE_THEME', 'default') . '/templates'),
+    ],
 ];

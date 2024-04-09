@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::dropIfExists('pages');
         Schema::create('pages', function (Blueprint $table) {
-            $table->string("author");
-            $table->string("page_slug")->primary();
-            $table->json("text_contents");
+            $table->string('author');
+            $table->string('page_slug')->primary();
+            $table->json('text_contents');
             $table->timestamps();
         });
     }

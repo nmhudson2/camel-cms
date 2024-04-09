@@ -22,9 +22,9 @@ class PageComponent {
         label.innerText = content;
         label.classList = "mt-4 text-2xl";
         label.setAttribute("target", component_id);
-
         return label;
     }
+
     createComponentOptions(component_id) {
         let options = document.createElement("button");
         options.addEventListener("click", function (event) {
@@ -56,6 +56,7 @@ class PageComponent {
             "beforebegin",
             this.createLabel(this.HeaderMap[type] ?? "Paragraph", tempID)
         );
+        root.insertAdjacentElement("beforebegin", this.createID(tempID));
         root.insertAdjacentElement(
             "afterend",
             this.createComponentOptions(tempID)

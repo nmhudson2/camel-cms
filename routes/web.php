@@ -1,14 +1,15 @@
 <?php
 
 use App\Http\Controllers\PageController;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PageRouteController;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
 
+// Base route calls the PageRouteController class, which will redirect based on the incomming request.
+Route::get('/{slug?}', function (?string $slug = 'homepage') {
+    $controller = new PageRouteController($slug);
 
-
-// Base route calls the PageRouteController class, which will redirect based on the incomming request. 
-Route::get('/{slug?}', function () {
-    return view('desktop');
+    return $controller->handle();
 });
 
 Route::middleware([
@@ -29,4 +30,8 @@ Route::middleware([
         })->name('settings.index');
     });
     Route::post('/create-new', [PageController::class, 'store'])->name('create-new');
+    Route::delete('/remove/{slug?}', function (string $slug = null) {
+        $controller = new PageController();
+        $controller->deletePage($slug);
+    });
 });

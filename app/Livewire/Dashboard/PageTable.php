@@ -10,6 +10,7 @@ class PageTable extends Component
     public function render()
     {
         $Controller = new PageController;
+
         return view('livewire.dashboard.page-table', ['pages' => $Controller->getAllPages()]);
     }
 }

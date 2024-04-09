@@ -10,6 +10,7 @@ class Toolbar extends Component
     public function render()
     {
         $Controller = new PageController;
+
         return view('livewire.editor.toolbar', ['page_meta' => $Controller->index('')]);
     }
 }

@@ -25,7 +25,7 @@ class PageController extends Controller
             'page_slug' => $this->cleanSlugs($request->page_slug),
         ], [
             'text_contents' => json_encode($request->text_contents),
-            'name' => $request->name,
+            'name' => e($request->name),
             'author' => auth()->user()->name,
         ]);
     }
@@ -38,6 +38,7 @@ class PageController extends Controller
     public function generate(?string $slug)
     {
         $resource = new PageResource(Page::findOrFail($slug));
+
         return view('index', ['page_meta' => [
             'name' => $resource['name'],
             'author' => $resource['author'],

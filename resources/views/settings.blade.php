@@ -4,7 +4,7 @@
             {{ __('Settings ') }}
         </h2>
     </x-slot>
-    @livewire('dashboard.site-settings')
+    <x-camel_cms.dashboard.site-settings :$templates />
 
 
 

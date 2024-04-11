@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\PageRouteController;
+use App\Http\Controllers\SiteSetupController;
+use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -23,14 +25,37 @@ Route::middleware([
         })->name('dashboard');
         Route::get('/editor/{page_slug?}', function ($page_slug = null) {
             $controller = new PageController();
+
             return view('editor', ['exists' => 'false', 'page_meta' => null, 'page_data' => $controller->index($page_slug)]);
         })->name('editor.page_slug');
         Route::get('/settings', function () {
-            return view('settings');
+            $templates = array_diff(scandir(app()->environmentPath() . '/includes/themes', SCANDIR_SORT_DESCENDING), ['.', '..']);
+            return view('settings', ['templates' => $templates]);
         })->name('settings.index');
     });
+    Route::prefix('actions')->group(function () {
+        Route::post('set-app-name', function (Request $request) {
+            $controller = new SiteSetupController();
+            $controller->changeAppName($request->app_name);
+            return back();
+        })->name('actions/set-app-name');
+        Route::post('set-active-theme', function (Request $request) {
+            $controller = new SiteSetupController();
+            $controller->changeActiveTheme($request->active_theme);
+            return back();
+        })->name('actions/set-active-theme');
+        Route::post('create-new-user', function (Request $request) {
+            $controller = new SiteSetupController();
+            $controller->addNewUser(['user_name' => $request->user_name, 'user_email' => $request->user_email, 'user_pass' => $request->user_pass]);
+            return back();
+        })->name('actions/create-new-user');
+    });
+    Route::post('/new-user', function (Request $request) {
+        $controller = new UserController;
+        $controller->Create(['name' => $request->name, 'email' => $request->new_email, 'password' => $request->new_password]);
+    })->name('new-user');
     Route::post('/create-new', [PageController::class, 'store'])->name('create-new');
-    Route::delete('/remove/{slug?}', function (string $slug = null) {
+    Route::delete('/remove/{slug?}', function (?string $slug = null) {
         $controller = new PageController();
         $controller->deletePage($slug);
     });

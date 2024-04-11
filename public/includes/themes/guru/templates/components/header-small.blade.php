@@ -1,0 +1,1 @@
+<h3 class="{{$class}}" id="{{$id}}">{{$content}}</h3>

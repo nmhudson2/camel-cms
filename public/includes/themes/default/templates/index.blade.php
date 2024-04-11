@@ -8,7 +8,8 @@ where content will be propogated. -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{env("APP_NAME")}}&nbsp; &#x2022; &nbsp; {{ucfirst($page_meta['name'])}}</title>
     <base href="{{env('APP_URL')}}" />
-    <link rel="stylesheet" href="{{asset('includes/themes/default/assets/css/index.css')}}">
+    <link rel="stylesheet" href="{{asset('includes/themes/'.env('ACTIVE_THEME','default').'/assets/css/index.css')}}">
+    <script src='{{asset('includes/themes/'.env('ACTIVE_THEME','default').'/assets/js/index.js')}}'></script>
 
 </head>
 

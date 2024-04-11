@@ -2,18 +2,36 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Contracts\Filesystem\FileNotFoundException;
+use MirazMac\DotEnv\Writer;
 
 class SiteSetupController extends Controller
 {
-    protected $envFile = base_path('.env');
 
-    public function WriteToEnv(string $key, mixed $value)
+
+    public function changeAppName(string $name): void
     {
-        try {
-            file_put_contents($this->envFile, str_replace($key.'=', $key.'='.$value, file_get_contents($this->envFile)));
-        } catch (FileNotFoundException $e) {
-            $e->getMessage();
-        }
+        $writer = new Writer(base_path('.env'));
+        $writer
+            ->set('APP_NAME', $name)
+            ->write();
+    }
+
+    public function changeActiveTheme(string $theme): void
+    {
+        $writer = new Writer(base_path('.env'));
+        $writer
+            ->set('ACTIVE_THEME', $theme)
+            ->write();
+    }
+
+    public function addNewUser(array $details): void
+    {
+        User::create([
+            'name' => $details['user_name'],
+            'email' => $details['user_email'],
+            'password' => $details['user_pass']
+        ]);
     }
 }

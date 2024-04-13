@@ -1,11 +1,16 @@
 <div id="page_builder_wrapper" class="w-[750px] flex flex-col items-center mx-auto mt-[5%]">
     <div id="page_contents_root" class="flex flex-col w-[700px]">
         <script>
+            String.prototype.e_html = function() {
+                this.replace('<', '&#60;');
+            }
+
             function toggleHiddenElementOptions() {
                 let optionsMenu = document.getElementById("options-menu");
                 optionsMenu.classList.toggle("hidden");
             }
             class PageComponent {
+
                 HeaderMap = {
                     "h-big": "Header",
                     "h-small": "Sub Header",
@@ -138,6 +143,10 @@
                         "X-CSRF-TOKEN": document.getElementById("csrf-token").value,
                     },
                     body: formData,
+                }).then((resolve) => {
+                    window.alert('Page Updated!')
+                }, (reject) => {
+                    window.alert('Unable to update page.')
                 });
             }
             document

@@ -4,7 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Http\Resources\PageResource;
 use App\Models\Page;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Facades\View;
 
 class PageController extends Controller
 {
@@ -25,7 +28,7 @@ class PageController extends Controller
             'page_slug' => $this->cleanSlugs($request->page_slug),
         ], [
             'text_contents' => json_encode($request->text_contents),
-            'name' => $request->name,
+            'name' => e($request->name),
             'author' => auth()->user()->name,
         ]);
     }
@@ -38,10 +41,18 @@ class PageController extends Controller
     public function generate(?string $slug)
     {
         $resource = new PageResource(Page::findOrFail($slug));
-        return view('index', ['page_meta' => [
+        if (View::exists('index')) {
+            return view('index', ['page_meta' => [
+                'name' => $resource['name'],
+                'author' => $resource['author'],
+            ], 'content' => json_decode($resource['text_contents'], true)]);
+        }
+        $GLOBALS['page'] = ['page_meta' => [
             'name' => $resource['name'],
             'author' => $resource['author'],
-        ], 'content' => json_decode($resource['text_contents'], true)]);
+        ], 'content' => json_decode($resource['text_contents'], true)];
+
+        return require public_path('includes/themes/' . env('ACTIVE_THEME') . '/index.php');
     }
 
     public function getAllPages()

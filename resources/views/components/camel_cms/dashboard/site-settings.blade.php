@@ -67,7 +67,7 @@
         <div name="form">
             <div class="px-4 py-5 bg-white sm:p-6 shadow sm:rounded-tl-md sm:rounded-tr-md">
                 <div class="col-span-6 sm:col-span-4 ">
-                    <x-label for='file_upload'>Current: {{env('SITE_LOGO_NAME')}}</x-label>
+                    <x-label class='flex flex-row m-5' for='file_upload'>Current: <img class="w-10 ml-3" src="{{asset(env('SITE_LOGO_PATH'))}}" alt="No Logo Selected"></x-label>
                     <x-input type="file" name="file_upload" />
                 </div>
             </div>

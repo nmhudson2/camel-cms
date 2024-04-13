@@ -38,6 +38,9 @@ class SiteSetupController extends Controller
 
     public static function changeSiteLogo(Request $request): void
     {
+        if (!in_array($request->file('file_upload')->extension(), ['jpeg', 'jpg', 'png'])) {
+            return;
+        }
         $path = $request->file('file_upload')->storeAs('public/client-logo', $request->file('file_upload')->getClientOriginalName());
         $url = Storage::url($path);
         $writer = new Writer(base_path('.env'));

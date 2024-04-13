@@ -18,30 +18,35 @@ where content will be propogated. -->
     $blocks = json_decode($content,true)['content']
     @endphp
 
-    @foreach($blocks as $block)
-    @switch($block['type'])
-    @case('h-big')
-    <x-header-large class="{{$block['ClassList']}}" id="{{$block['idList']}}">
-        <x-slot name="content">
-            {{$block['text']}}
-        </x-slot>
-    </x-header-large>
-    @break
-    @case('h-small')
-    <x-header-small class="{{$block['ClassList']}}" id="{{$block['idList']}}">
-        <x-slot name="content">
-            {{$block['text']}}
-        </x-slot>
-    </x-header-small>
-    @break
-    @case('paragraph')
-    <x-paragraph class="{{$block['ClassList']}}" id="{{$block['idList']}}">
-        <x-slot name="content">
-            {{$block['text']}}
-        </x-slot>
-    </x-paragraph>
-    @break
-    @endswitch
-    @endforeach
+    <main>
+
+
+        @foreach($blocks as $block)
+        @switch($block['type'])
+        @case('h-big')
+        <x-header-large class="{{$block['ClassList']}}" id="{{$block['idList']}}">
+            <x-slot name="content">
+                {{$block['text']}}
+            </x-slot>
+        </x-header-large>
+        @break
+        @case('h-small')
+        <x-header-small class="{{$block['ClassList']}}" id="{{$block['idList']}}">
+            <x-slot name="content">
+                {{$block['text']}}
+            </x-slot>
+        </x-header-small>
+        @break
+        @case('paragraph')
+        <x-paragraph class="{{$block['ClassList']}}" id="{{$block['idList']}}">
+            <x-slot name="content">
+                {{$block['text']}}
+            </x-slot>
+        </x-paragraph>
+        @break
+        @endswitch
+        @endforeach
+    </main>
+    <x-footer />
 
 </html>

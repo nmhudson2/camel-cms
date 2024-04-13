@@ -54,6 +54,31 @@
         </div>
     </form>
     <x-section-border />
+    <form method="post" enctype="multipart/form-data" action='{{route("actions/set-site-logo")}}' class="md:grid md:grid-cols-2 md:gap-6 mt-10 sm:mt-0">
+        @csrf
+        <div class="md:col-span-1 flex justify-between">
+            <div class="px-4 sm:px-0">
+                <h3 class="text-lg font-medium text-gray-900">
+                    Change App Logo
+                </h3>
+                <p name="description" class="mt-1 text-sm text-gray-600">Add this logo to your site headers</p>
+            </div>
+        </div>
+        <div name="form">
+            <div class="px-4 py-5 bg-white sm:p-6 shadow sm:rounded-tl-md sm:rounded-tr-md">
+                <div class="col-span-6 sm:col-span-4 ">
+                    <x-label for='file_upload'>Current: {{env('SITE_LOGO_NAME')}}</x-label>
+                    <x-input type="file" name="file_upload" />
+                </div>
+            </div>
+            <div class="flex items-center justify-end px-4 py-3 bg-gray-50 text-end sm:px-6 shadow sm:rounded-bl-md sm:rounded-br-md">
+                <button type='submit' class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150">
+                    Save
+                </button>
+            </div>
+        </div>
+    </form>
+    <x-section-border />
     <form method="post" action='{{route("actions/create-new-user")}}' class="md:grid md:grid-cols-2 md:gap-6 mt-10 sm:mt-0">
         @csrf
         <div class="md:col-span-1 flex justify-between">

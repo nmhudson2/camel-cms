@@ -10,7 +10,6 @@ use Illuminate\Support\Facades\Route;
 // Base route calls the PageRouteController class, which will redirect based on the incomming request.
 Route::get('/{slug?}', function (?string $slug = 'homepage') {
     $controller = new PageRouteController($slug);
-
     return $controller->handle();
 });
 
@@ -44,6 +43,10 @@ Route::middleware([
             $controller->changeActiveTheme($request->active_theme);
             return back();
         })->name('actions/set-active-theme');
+        Route::post('set-site-logo', function (Request $request) {
+            SiteSetupController::changeSiteLogo($request);
+            return back();
+        })->name('actions/set-site-logo');
         Route::post('create-new-user', function (Request $request) {
             $controller = new SiteSetupController();
             $controller->addNewUser(['user_name' => $request->user_name, 'user_email' => $request->user_email, 'user_pass' => $request->user_pass]);

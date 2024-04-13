@@ -20,6 +20,6 @@ class Page extends Model
         'name',
         'page_slug',
         'text_contents',
-        'last_edited_at',
+        'updated_at',
     ];
 }

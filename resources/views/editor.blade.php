@@ -36,7 +36,7 @@
 
         <!-- Page Content -->
         <main class='flex flex-row py-10'>
-            <form name="page_editor" class="w-[90%] m-auto bg-white flex flex-row rounded justify-between h-screen">
+            <form name="page_editor" class="w-[90%] m-auto bg-white flex flex-row rounded justify-between h-fit">
                 <input type="text" class="hidden" id='csrf-token' value="{{Session::token()}}">
                 <div class="flex flex-col w-[300px] shadow-xl">
                     @livewire('editor.toolbar')

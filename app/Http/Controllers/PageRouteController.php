@@ -20,10 +20,9 @@ class PageRouteController extends Controller
     {
         try {
             $controller = new PageController();
+            return  $controller->generate($this->slug);
         } catch (ModelNotFoundException $e) {
             return redirect()->to('homepage')->with($e->getMessage());
         }
-
-        return $controller->generate($this->slug);
     }
 }

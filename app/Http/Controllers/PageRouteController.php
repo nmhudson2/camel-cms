@@ -16,13 +16,18 @@ class PageRouteController extends Controller
         $this->slug = $slug;
     }
 
+    /**
+     * Handles route generations or homepage redirection.
+     * 
+     * @return mixed|\redirect 
+     */
     public function handle()
     {
         try {
             $controller = new PageController();
             return  $controller->generate($this->slug);
         } catch (ModelNotFoundException $e) {
-            return redirect()->to('homepage')->with($e->getMessage());
+            return redirect()->to(url("/"))->with($e->getMessage());
         }
     }
 }

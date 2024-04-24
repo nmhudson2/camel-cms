@@ -8,7 +8,11 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 // Base route calls the PageRouteController class, which will redirect based on the incomming request.
-Route::get( '/{slug?}', function (?string $slug = 'homepage') {
+Route::get( '/{slug?}', function (?string $slug = '') {
+	if ( ! $slug )
+	{
+		$slug = env( 'DEFAULT_PAGE', 'homepage' );
+	}
 	$controller = new PageRouteController( $slug );
 	return $controller->handle();
 } );
@@ -52,6 +56,10 @@ Route::middleware( [
 			$controller->addNewUser( [ 'user_name' => $request->user_name, 'user_email' => $request->user_email, 'user_pass' => $request->user_pass ] );
 			return back();
 		} )->name( 'actions/create-new-user' );
+		Route::post( 'set-app-root', function (Request $request) {
+			SiteSetupController::setActiveRoot( $request->input( 'root' ) );
+			return back();
+		} )->name( 'actions/set-app-root' );
 	} );
 	Route::post( '/new-user', function (Request $request) {
 		$controller = new UserController;

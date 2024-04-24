@@ -43,6 +43,7 @@
     </tr>
     @endforeach
 </table>
+{{$pages->links()}}
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         let deleters = document.querySelectorAll('button[target]');

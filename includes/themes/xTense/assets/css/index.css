@@ -1,0 +1,15 @@
+body {
+    background-color: chocolate;
+    color: white;
+    font-family: "Courier New", Courier, monospace;
+}
+
+.main {
+    max-width: 750px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+h1 {
+    text-transform: capitalize;
+}
